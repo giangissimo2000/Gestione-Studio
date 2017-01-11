@@ -460,9 +460,9 @@ namespace Gestione_Studio.Pagine
 
 
                 if( row["tipo_mov"].ToString() == "USCITA")
-                { e.Row.Foreground = new SolidColorBrush(Colors.Red); }
-                else
                 { e.Row.Foreground = new SolidColorBrush(Colors.Green); }
+                else
+                { e.Row.Foreground = new SolidColorBrush(Colors.Red); }
 
                 
 
