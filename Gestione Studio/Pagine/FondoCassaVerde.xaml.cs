@@ -25,10 +25,10 @@ namespace Gestione_Studio.Pagine
     /// <summary>
     /// Interaction logic for Quadernino.xaml
     /// </summary>
-    public partial class Quadernino : Page
+    public partial class FondoCassaVerde : Page
     {
         string percorso = "";
-        public Quadernino()
+        public FondoCassaVerde()
         {
             InitializeComponent();
             Verifica_Database();
@@ -92,7 +92,7 @@ namespace Gestione_Studio.Pagine
                 dt.Columns.Add("descrizione");
                 dt.Columns.Add("importo", typeof(decimal), null);
                 dt.Columns.Add("tipo_mov");
-                dt.Columns.Add("banca");
+               
                 dt.Columns.Add("utente");
 
                 
@@ -102,7 +102,7 @@ namespace Gestione_Studio.Pagine
                 SQLiteCommand command = connection.CreateCommand();
                 SQLiteDataReader Reader;
 
-                command.CommandText = "SELECT * FROM quadernino WHERE mese = '" + nomemese + "' ORDER BY DATA";
+                command.CommandText = "SELECT * FROM fondocassaverde WHERE mese = '" + nomemese + "' ORDER BY DATA";
 
                 connection.Open();
 
@@ -127,7 +127,7 @@ namespace Gestione_Studio.Pagine
                         string descrizione = Reader["descrizione"].ToString();
                         string importo = Reader["importo"].ToString();
                         string tipo_mov = Reader["tipo_mov"].ToString();
-                        string banca = Reader["banca"].ToString();
+                        
                         string utente = Reader["utente"].ToString();
 
 
@@ -138,7 +138,7 @@ namespace Gestione_Studio.Pagine
                         ne["descrizione"] = descrizione;
                         ne["importo"] = importo;
                         ne["tipo_mov"] = tipo_mov;
-                        ne["banca"] = banca;
+                       
                         ne["utente"] = utente;
 
                         dt.Rows.Add(ne);
@@ -282,7 +282,7 @@ namespace Gestione_Studio.Pagine
                     SQLiteConnection cancella = new SQLiteConnection("Data Source=" + percorso + ";Version=3;");
                     cancella.Open();
                     descrizione_del = descrizione_del.Replace("'", "''");
-                    string sql = "delete from quadernino where data='" + data3 + "' and mese='" + mese_del + "' and descrizione='" + descrizione_del + "' and importo='" + importo_del + "'";
+                    string sql = "delete from fondocassaverde where data='" + data3 + "' and mese='" + mese_del + "' and descrizione='" + descrizione_del + "' and importo='" + importo_del + "'";
 
 
 
@@ -311,7 +311,7 @@ namespace Gestione_Studio.Pagine
                 string mese = new CultureInfo("it-IT").TextInfo.ToTitleCase(s.ToUpper());
                 mese = comboBox.SelectedValue.ToString();// =mese;
 
-                Aggiungi aggiungi = new Aggiungi();
+                Aggiungi_Verde aggiungi = new Aggiungi_Verde();
                 aggiungi.ShowDialog();
                 string vv = Application.Current.Properties["PassGate"].ToString();
                 comboBox.SelectedValue  = Application.Current.Properties["PassGate2"].ToString();
@@ -342,7 +342,7 @@ namespace Gestione_Studio.Pagine
 
                 Application.Current.Properties["data_mod"] = rowview.Row["data"].ToString();
                 Application.Current.Properties["mese_mod"] = rowview.Row["mese"].ToString();
-                Application.Current.Properties["gruppo_mod"] = rowview.Row["gruppo"].ToString();
+               // Application.Current.Properties["gruppo_mod"] = rowview.Row["gruppo"].ToString();
 
                descrizione_mod = rowview.Row["descrizione"].ToString();
               //  descrizione_mod = descrizione_mod.Replace("", @"\'");
@@ -350,9 +350,9 @@ namespace Gestione_Studio.Pagine
                 Application.Current.Properties["descrizione_mod"] = descrizione_mod;
                 Application.Current.Properties["importo_mod"] = rowview.Row["importo"].ToString();
                 Application.Current.Properties["tipo_mod"] = rowview.Row["tipo_mov"].ToString();
-                Application.Current.Properties["banca_mod"] = rowview.Row["banca"].ToString();
+                
                 Application.Current.Properties["utente_mod"] = rowview.Row["utente"].ToString();
-                Modifica modifica = new Modifica();
+                Modifica_Verde modifica = new Modifica_Verde();
                 modifica.ShowDialog();
                 comboBox.SelectedValue = Application.Current.Properties["PassGate2"].ToString();
                 string vv = Application.Current.Properties["PassGate"].ToString();
@@ -375,10 +375,6 @@ namespace Gestione_Studio.Pagine
 
         }
 
-        private void Cerca_Voce_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService ns = NavigationService.GetNavigationService(this);
-            ns.Navigate(new Uri("/Pagine/Ricerca.xaml", UriKind.Relative));
-        }
+       
     }
 }

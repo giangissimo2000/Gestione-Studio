@@ -24,7 +24,7 @@ namespace Gestione_Studio
     /// <summary>
     /// Interaction logic for Modifica.xaml
     /// </summary>
-    public partial class Modifica : Window
+    public partial class Modifica_Verde : Window
     {
         string id;
         string data3;
@@ -35,10 +35,10 @@ namespace Gestione_Studio
         string gruppo;
         string descrizione;
         string importo;
-        string banca;
+       
         string tipo;
         string utente;
-        public Modifica()
+        public Modifica_Verde()
         {
             InitializeComponent();
             System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo("it-IT");
@@ -47,7 +47,7 @@ namespace Gestione_Studio
            
            
             Verifica_Database();
-            Read_Gruppi();
+           
             Read_Utenti();
             leggi_tabella();
         }
@@ -88,7 +88,7 @@ namespace Gestione_Studio
             }
 
         }
-        public void trova_id (string data, string mese, string gruppo, string descrizione, string importo, string movimento, string banca, string utente)
+        public void trova_id (string data, string mese, string gruppo, string descrizione, string importo, string movimento,  string utente)
         {
 
             try
@@ -106,7 +106,7 @@ namespace Gestione_Studio
 
                 descrizione = descrizione.Replace("'", "''");
 
-                command.CommandText  = "select id from quadernino where data ='" + data + "' and mese='" + mese + "' and gruppo='" + gruppo + "' and descrizione='" + descrizione + "' and importo='" + importo + "' and tipo_mov='" + movimento + "' and banca='" + banca + "' and utente='" + utente + "'";
+                command.CommandText  = "select id from fondocassaverde where data ='" + data + "' and mese='" + mese + "' and gruppo='" + gruppo + "' and descrizione='" + descrizione + "' and importo='" + importo + "' and tipo_mov='" + movimento +  "' and utente='" + utente + "'";
 
 
                     connection.Open();
@@ -154,27 +154,25 @@ namespace Gestione_Studio
             data3 = DateTime.ParseExact(data, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy/MM/dd");
             data4 = Application.Current.Properties["data_mod"].ToString();
             mese = Application.Current.Properties["mese_mod"].ToString();
-            gruppo = Application.Current.Properties["gruppo_mod"].ToString();
-            gruppi_combo.SelectedValue = Application.Current.Properties["gruppo_mod"];
+            gruppo = "FONDO CASSA";
+           
             descrizione = Application.Current.Properties["descrizione_mod"].ToString();
             descrizione_block.Text = Application.Current.Properties["descrizione_mod"].ToString();
             importo = Application.Current.Properties["importo_mod"].ToString();
             importo_block.Text = Application.Current.Properties["importo_mod"].ToString();
-            banca = Application.Current.Properties["banca_mod"].ToString();
+           
             tipo  = Application.Current.Properties["tipo_mod"].ToString();
             utente = Application.Current.Properties["utente_mod"].ToString();
             utenti_combo.SelectedValue = Application.Current.Properties["utente_mod"].ToString();
-            if (banca =="F") { fiscale.IsChecked = true; }
-            if (banca == "A") { altro.IsChecked = true; }
-            if (banca == "CF") { cassafiscale.IsChecked = true; }
+           
 
-            trova_id(data3, mese, gruppo, descrizione, importo, tipo, banca,utente);
+            trova_id(data3, mese, gruppo, descrizione, importo, tipo, utente);
 
         }
 
 
 
-        private void aggiorna_database(string data, string mese, string gruppo, string descrizione, string importo, string movimento, string banca, string utente)
+        private void aggiorna_database(string data, string mese, string gruppo, string descrizione, string importo, string movimento,  string utente)
         {
 
             try
@@ -184,7 +182,7 @@ namespace Gestione_Studio
                 SQLiteConnection modifica = new SQLiteConnection("Data Source = "+ percorso + "; Version = 3; ");
                 modifica.Open();
                 descrizione = descrizione.Replace("'", "''");
-                string sql = "update quadernino set data ='" + data + "', mese='" + mese + "', gruppo='" + gruppo + "', descrizione='" + descrizione + "', importo='" + importo + "', tipo_mov='"  + movimento + "', banca='" + banca + "', utente='" + utente + "'  where id='" + id + "'";
+                string sql = "update fondocassaverde set data ='" + data + "', mese='" + mese + "', gruppo='" + gruppo + "', descrizione='" + descrizione + "', importo='" + importo + "', tipo_mov='"  + movimento +  "', utente='" + utente + "'  where id='" + id + "'";
                 // string sqlh = "update Prodotti set Giacenza ='" + quantitanew + "'  where Codice ='" + codice + "'";
                 //insert into Prodotti (CodiceAAMS,Prezzo_pacchetto,Tipologia) values ( '" + CodiceAAMS + "','" + Prezzo_pacc + "','" + Tipologia + "')";//
 
@@ -201,52 +199,7 @@ namespace Gestione_Studio
         }
 
 
-        private void Read_Gruppi()
-        {
-            try
-            {
-                DataTable dt = new DataTable();
-
-                dt.Columns.Add("gruppi");
-                string path = Directory.GetCurrentDirectory();
-                string ConString = "Data Source=" + percorso + ";Version=3;";
-
-                SQLiteConnection connection = new SQLiteConnection(ConString);
-                SQLiteCommand command = connection.CreateCommand();
-                SQLiteDataReader Reader;
-
-
-
-                command.CommandText = "SELECT * FROM gruppi ORDER BY GRUPPI";
-
-
-                connection.Open();
-                Reader = command.ExecuteReader();
-                if (Reader.HasRows)
-                {
-
-                    while (Reader.Read())
-                    {
-                        DataRow ne = dt.NewRow();
-                        string gruppi = Reader["gruppi"].ToString();
-                        gruppi_combo.Items.Add(gruppi);
-                    }
-
-                    //gruppi_combo.ItemsSource = dt.DefaultView;
-                }
-                Reader.Close();
-
-
-
-
-            }
-            catch (Exception e)
-            {
-
-                MessageBox.Show("ERRORE!: ", e.ToString());
-
-            }
-        }
+      
 
         private void Esci_Click(object sender, RoutedEventArgs e)
         {
@@ -258,21 +211,15 @@ namespace Gestione_Studio
         {
             if (utenti_combo.Text != "")
             {
-                if (gruppi_combo.Text != "")
-                {
+                
                     if (descrizione_block.Text != "")
                     {
                         if (importo_block.Text != "")
 
                         {
 
-                            if (fiscale.IsChecked.Value == false && altro.IsChecked.Value == false && cassafiscale.IsChecked==false)
-                            {
-
-                                MessageBox.Show("Selezionare Fiscale, Cassa o Altro!");
-                            }
-                            else
-                            {
+                            
+                            
 
 
 
@@ -292,7 +239,7 @@ namespace Gestione_Studio
 
 
                                     string movimento = "";
-                                    string banca = "";
+                                   
                                   //  string s = scegli_data.SelectedDate.Value.ToString("MMMM", new CultureInfo("it-IT"));
                                   //  string mese1 = new CultureInfo("it-IT").TextInfo.ToTitleCase(s.ToUpper());
                                     string data3 = scegli_data.SelectedDate.Value.ToString("yyyy/MM/dd");
@@ -300,7 +247,7 @@ namespace Gestione_Studio
                                     string mese = new CultureInfo("it-IT").TextInfo.ToTitleCase(s.ToUpper());
                                     //string mese = 
                                     string descrizione = descrizione_block.Text;
-                                    string gruppo = gruppi_combo.Text;
+                                    string gruppo = "FONDO CASSA";
                                     string utente = utenti_combo.Text;
                                     string importo = importo_block.Text;
                                     decimal number1_;
@@ -311,13 +258,11 @@ namespace Gestione_Studio
                                     }
 
 
-                                    if (fiscale.IsChecked.Value == true) { banca = "F"; }
-                                    if (altro.IsChecked.Value == true) { banca = "A"; }
-                                    if (cassafiscale.IsChecked.Value == true) { banca = "CF"; }
+                                   
 
 
 
-                                    aggiorna_database(data3, mese, gruppo, descrizione, importo, movimento, banca, utente);
+                                    aggiorna_database(data3, mese, gruppo, descrizione, importo, movimento,  utente);
                                     var myObject = this.Owner as MainWindow;
                                     Application.Current.Properties["PassGate"] = mese;
                                     Application.Current.Properties["PassGate2"] = mese;
@@ -327,15 +272,13 @@ namespace Gestione_Studio
                                 }
 
 
-                            }
+                            
 
                         }
                         else MessageBox.Show("Digitare Importo!!");
                     }
                     else MessageBox.Show("Digitare Descrizione!");
-                }
-
-                else MessageBox.Show("Selezionare gruppo!");
+             
 
             }
             else MessageBox.Show("Selezionare utente!");

@@ -134,7 +134,7 @@ namespace Gestione_Studio.Pagine
                         string importo1 = Reader["importo"].ToString();
                         decimal imp = Convert.ToDecimal(importo1);
                         string importo = Convert.ToString(imp * (-1));
-                        string tipo_mov = Reader["tipo_mov"].ToString();
+                        string tipo_mov = "ENTRATA"; // Reader["tipo_mov"].ToString();
                         
                         string utente = Reader["utente"].ToString();
 

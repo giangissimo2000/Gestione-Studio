@@ -222,7 +222,7 @@ namespace Gestione_Studio
 
 
 
-                command.CommandText = "SELECT * FROM utente";
+                command.CommandText = "SELECT * FROM utente ORDER BY NOME";
 
 
                 connection.Open();

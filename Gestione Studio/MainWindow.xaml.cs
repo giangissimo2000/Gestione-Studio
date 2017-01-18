@@ -37,7 +37,8 @@ namespace Gestione_Studio
         public MainWindow()
         {
             InitializeComponent();
-          //  Verifica_Database();
+            //  Verifica_Database();
+            this.Title = "Gestione Studio 1.1 - QUADERNINO";
             frame.Source = new Uri("/Pagine/Quadernino.xaml", UriKind.RelativeOrAbsolute); // initialize frame with the "test1" view
                                                                              // qua.Visibility = Visibility.Collapsed;
                                                                              //  frame.Navigate(new System.Uri("/Pagine/Quadernino.xaml", UriKind.RelativeOrAbsolute));
@@ -121,7 +122,7 @@ namespace Gestione_Studio
         private void quadernino_btn_Click(object sender, RoutedEventArgs e)
         {
 
-
+            this.Title = "Gestione Studio 1.1 - QUADERNINO";
             
             frame.Navigate(new System.Uri("/Pagine/Quadernino.xaml", UriKind.RelativeOrAbsolute));
          
@@ -131,35 +132,46 @@ namespace Gestione_Studio
 
         private void riepilogo_btn_Click(object sender, RoutedEventArgs e)
         {
+            this.Title = "Gestione Studio 1.1 - RIEPILOGO";
             frame.Navigate(new System.Uri("/Pagine/Riepilogo.xaml", UriKind.RelativeOrAbsolute));
             ShowHideMenu("sbHideLeftMenu", btnLeftMenuHide, btnLeftMenuShow, pnlLeftMenu);
+
         }
 
         private void posta_btn_Click(object sender, RoutedEventArgs e)
         {
+            this.Title = "Gestione Studio 1.1 - POSTA";
             frame.Navigate(new System.Uri("/Pagine/Posta.xaml", UriKind.RelativeOrAbsolute));
             ShowHideMenu("sbHideLeftMenu", btnLeftMenuHide, btnLeftMenuShow, pnlLeftMenu);
+
         }
 
         private void cat_btn_Click(object sender, RoutedEventArgs e)
         {
+            this.Title = "Gestione Studio 1.1 - CAT";
             frame.Navigate(new System.Uri("/Pagine/Cat.xaml", UriKind.RelativeOrAbsolute));
             ShowHideMenu("sbHideLeftMenu", btnLeftMenuHide, btnLeftMenuShow, pnlLeftMenu);
         }
 
         private void impostazioni_btn_Click(object sender, RoutedEventArgs e)
         {
+            this.Title = "Gestione Studio 1.1 - IMPOSTAZIONI";
             frame.Navigate(new System.Uri("/Pagine/Impostazioni.xaml", UriKind.RelativeOrAbsolute));
             ShowHideMenu("sbHideLeftMenu", btnLeftMenuHide, btnLeftMenuShow, pnlLeftMenu);
         }
 
         private void cassa_btn_Click(object sender, RoutedEventArgs e)
         {
+            this.Title = "Gestione Studio 1.1 - CASSA FISCALE";
             frame.Navigate(new System.Uri("/Pagine/Cassa_Fiscale.xaml", UriKind.RelativeOrAbsolute));
             ShowHideMenu("sbHideLeftMenu", btnLeftMenuHide, btnLeftMenuShow, pnlLeftMenu);
         }
 
-
-        
+        private void fondocassaverde_btn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Title = "Gestione Studio 1.1 - FONDOCASSA VERDE";
+            frame.Navigate(new System.Uri("/Pagine/FondoCassaVerde.xaml", UriKind.RelativeOrAbsolute));
+            ShowHideMenu("sbHideLeftMenu", btnLeftMenuHide, btnLeftMenuShow, pnlLeftMenu);
+        }
     }
 }

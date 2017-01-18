@@ -146,6 +146,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Pagine\Aggiungi_Verde.xaml.cs">
+      <DependentUpon>Aggiungi_Verde.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pagine\Aggiungi.xaml.cs">
       <DependentUpon>Aggiungi.xaml</DependentUpon>
     </Compile>
@@ -173,6 +176,9 @@
     <Compile Include="Pagine\Impostazioni.xaml.cs">
       <DependentUpon>Impostazioni.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pagine\Modifica_Verde.xaml.cs">
+      <DependentUpon>Modifica_Verde.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pagine\Modifica_Fondocassafiscale.xaml.cs">
       <DependentUpon>Modifica_Fondocassafiscale.xaml</DependentUpon>
     </Compile>
@@ -191,6 +197,9 @@
     <Compile Include="Pagine\Posta.xaml.cs">
       <DependentUpon>Posta.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pagine\FondoCassaVerde.xaml.cs">
+      <DependentUpon>FondoCassaVerde.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pagine\Quadernino.xaml.cs">
       <DependentUpon>Quadernino.xaml</DependentUpon>
     </Compile>
@@ -200,6 +209,10 @@
     <Compile Include="Pagine\Riepilogo.xaml.cs">
       <DependentUpon>Riepilogo.xaml</DependentUpon>
     </Compile>
+    <Page Include="Pagine\Aggiungi_Verde.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pagine\Aggiungi_Utente.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -259,6 +272,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pagine\Modifica_Verde.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pagine\Modifica_Fondocassafiscale.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -282,6 +299,10 @@
     <Page Include="Pagine\Posta.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pagine\FondoCassaVerde.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pagine\Quadernino.xaml">
       <SubType>Designer</SubType>
