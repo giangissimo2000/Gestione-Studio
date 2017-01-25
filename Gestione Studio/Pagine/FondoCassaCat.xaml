@@ -14,7 +14,7 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="Aggiungi Uscita Cat" Height="250" Width="450" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/Gestione Studio;component/book-xxl.ico">
+        Title="Aggiungi Uscita Cat" Height="270" Width="450" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/Gestione Studio;component/book-xxl.ico">
     <Window.Resources>
         <Style x:Key="Flat_Button" TargetType="{x:Type Button}">
             <Setter Property="Width" Value="150"/>
@@ -97,15 +97,18 @@
     
     <Grid>
         <DockPanel LastChildFill="True" Name="quadernino_panel">
-            <StackPanel Name="aggiungi_panel" Height="100" Width="auto"  Orientation="Horizontal" VerticalAlignment="Top" DockPanel.Dock="Top" Margin="10,0,0,0">
-                
-                <Label Content="Utente: " Margin="10,0,20,0" Width="60" Height="30"/>
-                <ComboBox Name="utenti_combo" Margin="10,0,0,0" Width="100" />
-                <Label Content="Importo: " Margin="20,0,20,0" Width="60" Height="30"/>
-                <TextBox x:Name="importo_block" FontSize="14" TextWrapping="Wrap" Width="100"   Margin="10,10,0,35" HorizontalContentAlignment="Center" KeyDown="importo_block_KeyDown" PreviewTextInput="importo_block_PreviewTextInput" />
-                
-                
-                </StackPanel >
+            <StackPanel Name="data_panel" Height="40" Width="auto"  Orientation="Horizontal" VerticalAlignment="Top" DockPanel.Dock="Top" Margin="10,0,0,0">
+                                    <Label Content="Data: " Margin="10,10,0,0" Width="60" Height="30"/>
+                    <DatePicker xml:lang="it-IT" x:Name="scegli_data" HorizontalAlignment="Right"  Margin="30,10,0,0" VerticalAlignment="Top" SelectedDateChanged="DatePicker_SelectedDateChanged" />
+                </StackPanel>
+                <StackPanel Name="aggiun" Height="80" Width="auto"  Orientation="Horizontal" VerticalAlignment="Top" DockPanel.Dock="Top" Margin="10,0,0,0">
+                    <Label Content="Utente: " Margin="10,0,20,0" Width="60" Height="30"/>
+                    <ComboBox Name="utenti_combo" Margin="10,0,0,0" Width="100" />
+                    <Label Content="Importo: " Margin="20,0,20,0" Width="60" Height="30"/>
+                    <TextBox x:Name="importo_block" FontSize="14" TextWrapping="Wrap" Width="100"   Margin="10,10,0,25" HorizontalContentAlignment="Center" KeyDown="importo_block_KeyDown" PreviewTextInput="importo_block_PreviewTextInput" />
+                </StackPanel>
+
+            
                <StackPanel Height="60" Width="auto"  Orientation="Horizontal" VerticalAlignment="Top" DockPanel.Dock="Top" Margin="10,0,0,0">
                 <Label Content="Descrizione: " Margin="10,10,0,0" Width="80" Height="30"/>
                 <TextBox x:Name="descrizione_block" CharacterCasing="Upper" FontSize="14" TextWrapping="Wrap" Width="310" Height="35"  Margin="10,0,0,0" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" />

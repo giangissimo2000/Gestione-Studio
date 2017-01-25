@@ -39,6 +39,8 @@ namespace Gestione_Studio
         public Modifica_Fondocassacat()
         {
             InitializeComponent();
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo("it-IT");
+            System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("it-IT");
             Verifica_Database();
             Read_Utenti();
             leggi_tabella();
@@ -139,6 +141,7 @@ namespace Gestione_Studio
         {
             var myObject = this.Owner as MainWindow;
             string data = Application.Current.Properties["data_mod"].ToString();
+            scegli_data.SelectedDate = Convert.ToDateTime(data);
             data3 = DateTime.ParseExact(data, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy/MM/dd");
             mese = Application.Current.Properties["mese_mod"].ToString();
             
@@ -301,8 +304,10 @@ namespace Gestione_Studio
 
                             string movimento = "";
 
-                            string s = DateTime.Now.ToString("MMMM", new CultureInfo("it-IT"));
+                            
+                            string s = scegli_data.SelectedDate.Value.ToString("MMMM", new CultureInfo("it-IT"));
                             string mese = new CultureInfo("it-IT").TextInfo.ToTitleCase(s.ToUpper());
+                           
                             string descrizione = descrizione_block.Text;
 
                             string utente = utenti_combo.Text;
@@ -322,6 +327,7 @@ namespace Gestione_Studio
                             aggiorna_database(data3, mese, descrizione, importo, movimento, utente);
                             var myObject = this.Owner as MainWindow;
                             Application.Current.Properties["PassGate"] = mese;
+                            Application.Current.Properties["PassGate2"] = mese;
                             // myObject.Read_Database(mese);
                             //  myObject.totale();
                             this.Close();
@@ -334,6 +340,26 @@ namespace Gestione_Studio
                 else MessageBox.Show("Digitare Importo!!");
             }
             else MessageBox.Show("Selezionare utente!!");
+        }
+
+        private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var picker = sender as DatePicker;
+
+            // ... Get nullable DateTime from SelectedDate.
+            DateTime? date = picker.SelectedDate;
+            if (date == null)
+            {
+                // ... A null object.
+                this.Title = "No date";
+            }
+            else
+            {
+
+
+                // ... No need to display the time.
+                this.Title = date.Value.ToShortDateString();
+            }
         }
     }
 }

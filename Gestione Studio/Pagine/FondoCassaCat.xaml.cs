@@ -30,6 +30,11 @@ namespace Gestione_Studio
         public FondoCassaCat()
         {
             InitializeComponent();
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo("it-IT");
+            System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("it-IT");
+
+            string data = DateTime.Now.ToString("dd/MM/yyyy");
+            scegli_data.SelectedDate = DateTime.Now.Date;
             Verifica_Database();
             Read_Utenti();
 
@@ -173,9 +178,10 @@ namespace Gestione_Studio
 
                         else
                         {
-                            string data = DateTime.Now.ToString("yyyy/MM/dd");
+                            string data = scegli_data.SelectedDate.Value.ToString("yyyy/MM/dd");
                             string movimento = "";
-                            string s = DateTime.Now.ToString("MMMM", new CultureInfo("it-IT"));
+                            string s = scegli_data.SelectedDate.Value.ToString("MMMM", new CultureInfo("it-IT"));
+
                             string mese = new CultureInfo("it-IT").TextInfo.ToTitleCase(s.ToUpper());
                             string descrizione = descrizione_block.Text;
                             string utente = utenti_combo.Text;
@@ -189,7 +195,10 @@ namespace Gestione_Studio
                             movimento = "USCITA";
                             aggiungi_fondo(data, mese, descrizione, importo, movimento, utente);
                             Application.Current.Properties["PassGate"] = mese;
+                            Application.Current.Properties["PassGate2"] = mese;
                             this.Close();
+
+
                         }
                     }
 
@@ -233,6 +242,26 @@ namespace Gestione_Studio
             string mese = new CultureInfo("it-IT").TextInfo.ToTitleCase(s);
             Application.Current.Properties["PassGate"] = mese;
             this.Close();
+        }
+
+        private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var picker = sender as DatePicker;
+
+            // ... Get nullable DateTime from SelectedDate.
+            DateTime? date = picker.SelectedDate;
+            if (date == null)
+            {
+                // ... A null object.
+                this.Title = "No date";
+            }
+            else
+            {
+
+
+                // ... No need to display the time.
+                this.Title = date.Value.ToShortDateString();
+            }
         }
     }
 

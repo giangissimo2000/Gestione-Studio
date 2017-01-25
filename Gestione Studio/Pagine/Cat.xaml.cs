@@ -342,6 +342,7 @@ namespace Gestione_Studio.Pagine
             FondoCassaPosta FondoCassaPosta = new FondoCassaPosta();
             FondoCassaPosta.ShowDialog();
             string vv = Application.Current.Properties["PassGate"].ToString();
+            comboBox.SelectedValue = Application.Current.Properties["PassGate2"].ToString();
             Read_Database(vv);
             totale();
         }
@@ -482,6 +483,7 @@ namespace Gestione_Studio.Pagine
             FondoCassaCat FondoCassaCat = new FondoCassaCat();
             FondoCassaCat.ShowDialog();
             string vv = Application.Current.Properties["PassGate"].ToString();
+            comboBox.SelectedValue = Application.Current.Properties["PassGate2"].ToString();
             Read_Database(vv);
             totale();
         }
